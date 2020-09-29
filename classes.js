@@ -29,7 +29,18 @@
   Call your class Employee and receive all the data in the constructor in the order listed above.
 */
 
-//Code Here
+class Employee {
+  constructor(first_name, last_name, email, age){
+  this.first_name = first_name;
+  this.last_name = last_name;
+  this.email = email;
+  this.age = age;
+  }
+
+  makeWidget(){
+    return `${this.first_name} ${this.last_name} Widget`;
+  }
+}
 
 
 ////////// PROBLEM 2 //////////
@@ -47,7 +58,20 @@
   Call your new class Manager
 */
 
-//Code Here
+class Manager extends Employee{
+  constructor(first_name, last_name, email, age, reports){
+    super(first_name, last_name, email, age)
+    this.reports = [];
+  }
+
+  hire(Employee){
+    this.reports.push(Employee);
+  }
+
+  fire(i){
+    this.reports.splice(i, 1);
+  }
+}
 
 
 ////////// PROBLEM 3 //////////
@@ -71,7 +95,68 @@
   Call your new class ProgressiveManager
 */
 
-//Code Here
+class ProgressiveManager extends Manager{
+  constructor(first_name, last_name, email, age, reports, title, bonus){
+    super(first_name, last_name, email, age, reports)
+    this.title = 'Not a manager';
+    this.bonus = 0;
+  }
+
+  hire(){
+    super.hire();
+    if(this.reports.length === 0){
+      return this.title;
+    }
+    else if(this.reports.length > 0 && this.reports.length < 4){
+      this.title = 'Barely Manager';
+      return this.title;
+    }
+    else if(this.reports.length > 3 && this.reports.length < 11){
+      this.title = 'Mostly Manager';
+      return this.title;
+    }
+    else if(this.reports.length > 10 && this.reports.length < 51){
+      this.title = 'Manager';
+      return this.title;
+    }
+    else if(this.reports.length > 50 && this.reports.length < 101){
+      this.title = 'Manager Plus';
+      return this.title;
+    }
+    else{
+      this.title = 'Bestest Manager'
+      return this.title;
+    }
+  }
+
+  fire(){
+    super.fire();
+    this.bonus += 100;
+    if(this.reports.length === 0){
+      return this.title;
+    }
+    else if(this.reports.length > 0 && this.reports.length < 4){
+      this.title = 'Barely Manager';
+      return this.title;
+    }
+    else if(this.reports.length > 3 && this.reports.length < 11){
+      this.title = 'Mostly Manager';
+      return this.title;
+    }
+    else if(this.reports.length > 10 && this.reports.length < 51){
+      this.title = 'Manager';
+      return this.title;
+    }
+    else if(this.reports.length > 50 && this.reports.length < 101){
+      this.title = 'Manager Plus';
+      return this.title;
+    }
+    else{
+      this.title = 'Bestest Manager';
+      return this.title;
+    }
+  }
+}
 
 
 
@@ -98,6 +183,29 @@
         - The anonymous function should decrease wear_and_tear_count by 10, and set needs_reboot to false
 */
 
-//Code Here
+class Machine{
+  constructor(widgets_made_count, wear_and_tear, needs_reboot){
+  this.widgets_made_count = 0;
+  this.wear_and_tear = 0;
+  this.needs_reboot = false;
+  }
+
+  makeWidgets(num){
+    this.widgets_made_count += num;
+    this.wear_and_tear = this.widgets_made_count / 50;
+    console.log(this.widgets_made_count, this.wear_and_tear)
+  }
+  fixMachine(){
+    this.needs_reboot = true;
+  }
+  
+  reboot(){
+    const rebootComplete = () => {
+      this.wear_and_tear -= 10;
+      this.needs_reboot = false;
+      // return this;
+    }
+  }
+}
 
 
